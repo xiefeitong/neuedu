@@ -12,19 +12,29 @@
 
 
 
-    <!--<mvc:annotation-driven />-->
-    <context:component-scan base-package="com.neuedu"></context:component-scan>
 
-   <!-- <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>-->
+   <context:component-scan base-package="com.neuedu"></context:component-scan>
+
+    <!--<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+        <!--<property name="prefix" value="/WEB-INF/jsp/"/>-->
+        <!--<property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
+
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件的最大尺寸为5MB -->
+        <property name="maxUploadSize">
+            <value>5242880</value>
+        </property>
+    </bean>
+
 
     <!-- Freemarker配置 -->
     <bean id="freemarkerConfig"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/WEB-INF/views/" />
+    <!--前缀路径 -->    <property name="templateLoaderPath" value="/WEB-INF/views/" />
         <property name="freemarkerSettings">
             <props>
                 <prop key="template_update_delay">0</prop>
@@ -60,32 +70,9 @@
     </bean>
 
 
+
     <mvc:annotation-driven />
     <mvc:resources mapping="/static/**/" location="/WEB-INF/static/"></mvc:resources>
-
-
-
-
-
-
-
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- 设置上传文件的最大尺寸为5MB -->
-        <property name="maxUploadSize">
-            <value>5242880</value>
-        </property>
-    </bean>
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/user/**"/>
-            <mvc:exclude-mapping path="/user/login"/>
-            <bean class="com.neuedu.interceptors.AuthorityInterceptor"></bean>
-
-        </mvc:interceptor>
-
-    </mvc:interceptors>
-
 
 
 

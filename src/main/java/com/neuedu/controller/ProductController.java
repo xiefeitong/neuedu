@@ -35,7 +35,7 @@ public class ProductController {
             List<Product> productList=productService.findAll();
 
             session.setAttribute("productlist",productList);
-            return "productlist";
+            return "product/list";
 
 
     }
@@ -53,27 +53,30 @@ public class ProductController {
 
             request.setAttribute("product",product);
 
-            return "productupdate";
+            return "product/update";
         }
 
 
     @RequestMapping(value = "update/{id}",method = RequestMethod.POST)
-    public  String  update(Product product, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-
+    public  String  update(@PathVariable("id") Integer id,Product product, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        //System.out.println("1111111111");
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         product.setMainImage("zanwu");
         product.setSubImages("zanwu");
-
-
+       // System.out.println("22222222222");
+        product.setCreateTime(new Date());
+        product.setUpdateTime(new Date());
+        product.setId(id);
             int count= productService.updateProduct(product);
-
+        //System.out.println("3333333333333");
             if(count>0){
                 //修改成功
+                System.out.println("修改成功");
                 return "redirect:/user/product/find";
             }
             System.out.println("没有修改成功");
-            return "productupdate";
+            return "product/update";
 
 
     }
@@ -119,7 +122,7 @@ public class ProductController {
     public  String  add(HttpServletResponse response, HttpServletRequest request){
 
 
-            return "productadd";
+            return "product/add";
 
 
     }
@@ -136,15 +139,17 @@ public class ProductController {
             System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
             product.setCreateTime(new Date());
             product.setUpdateTime(new Date());
-            System.out.println(product.toString());
+           // System.out.println(product.toString());
             int count= productService.addProduct(product);
 
             if(count>0){
                 //修改成功
+                System.out.println("修改成功！");
                 return "redirect:/user/product/find";
+
             }
 
-            return "productadd";
+            return "redirect:/user/product/add";
         }
 
 

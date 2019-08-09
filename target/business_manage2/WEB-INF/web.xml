@@ -14,6 +14,9 @@
   </context-param>
 
 
+
+
+
   <!--配置spring监听器-->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -35,6 +38,8 @@
     <servlet-name>springmvc</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

@@ -47,7 +47,7 @@ public class UserController {
 
             session.setAttribute(Const.CURRENT_USER,loginUserInfo);
 
-            return "redirect:home";
+            return "home/home";
 
 
         }

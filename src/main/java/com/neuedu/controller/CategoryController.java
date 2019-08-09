@@ -30,7 +30,7 @@ public class CategoryController {
         List<Category> categoryList=categoryService.findAll();
 
         session.setAttribute("categorylist",categoryList);
-        return "categorylist";
+        return "category/list";
     }
 
 
@@ -42,7 +42,7 @@ public class CategoryController {
 
         request.setAttribute("category",category);
 
-        return "categoryupdate";
+        return "category/index";
     }
 
     @RequestMapping(value = "update/{id}",method = RequestMethod.POST)
@@ -59,7 +59,7 @@ public class CategoryController {
            return "redirect:/user/category/find";
        }
 
-        return "categoryupdate";
+        return "category/index";
     }
 
     @RequestMapping(value="update_delete/{id}",method = RequestMethod.GET)
@@ -80,7 +80,7 @@ public class CategoryController {
     @RequestMapping(value = "add",method = RequestMethod.GET)
     public  String  add(HttpServletResponse response, HttpServletRequest request){
 
-            return "categoryadd";
+            return "category/add";
 
     }
 
